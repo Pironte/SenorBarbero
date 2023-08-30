@@ -10,5 +10,13 @@ namespace SenorBarbero.Data
         }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Configuration> Configurations { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<BarberShop> Bars { get; set; }
+
+        public DbSet<SocialMedia> SocialMedia { get; set; }
     }
 }
