@@ -16,10 +16,8 @@ namespace SenorBarbero.Model
         [Column("Descricao")]
         public string? Description { get; set; }
 
-        [Required]
-        [Column("Horarios")]
-        public DateTime? Schedules { get; set; }
-
         public virtual ICollection<SocialMedia> SocialMedias { get; set; } = new List<SocialMedia>();
+
+        public virtual ICollection<Schedules> Schedules { get; set; } = new List<Schedules>();
     }
 }
