@@ -1,17 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SenorBarbero.Model;
 
 namespace SenorBarbero.Data
 {
-    public class SenorBarberoDbContext : DbContext
+    public class SenorBarberoDbContext : IdentityDbContext<User>
     {
         public SenorBarberoDbContext(DbContextOptions<SenorBarberoDbContext> opts) : base(opts)
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        public override DbSet<User> Users { get; set; }
 
-        public DbSet<Configuration> Configurations { get; set; }
+        public DbSet<Configurations> Configurations { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SenorBarbero.Data;
 
@@ -10,9 +11,11 @@ using SenorBarbero.Data;
 namespace SenorBarbero.Migrations
 {
     [DbContext(typeof(SenorBarberoDbContext))]
-    partial class SenorBarberoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230903013705_CriandoUsuarioIdentity")]
+    partial class CriandoUsuarioIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,7 +306,7 @@ namespace SenorBarbero.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ConfigurationId")
+                    b.Property<int>("ConfigurationId")
                         .HasColumnType("int")
                         .HasColumnName("Configuracao_Id");
 
@@ -448,7 +451,9 @@ namespace SenorBarbero.Migrations
                 {
                     b.HasOne("SenorBarbero.Model.Configurations", "Configuration")
                         .WithOne("User")
-                        .HasForeignKey("SenorBarbero.Model.User", "ConfigurationId");
+                        .HasForeignKey("SenorBarbero.Model.User", "ConfigurationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Configuration");
                 });

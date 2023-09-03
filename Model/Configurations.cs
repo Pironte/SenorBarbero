@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SenorBarbero.Model
 {
     [Table("Configuracoes")]
-    public class Configuration
+    public class Configurations
     {
         [Key]
         public int Id { get; set; }
