@@ -9,6 +9,13 @@ namespace SenorBarbero.Services
 {
     public class TokenService : ITokenService
     {
+        private IConfiguration _configuration;
+
+        public TokenService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public string GenerateToken(User user)
         {
             if (string.IsNullOrWhiteSpace(user.UserName))
@@ -23,7 +30,11 @@ namespace SenorBarbero.Services
                 new Claim("LoginTimestamp", DateTime.UtcNow.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("9ADFASFDAFDSAFASFDAFADSFASFADFA4343243"));
+            var symetricSecurityKey = _configuration["SymmetricSecurityKey"];
+            if (symetricSecurityKey == null)
+                throw new ApplicationException("symetricSecurityKey não informado nos secrets contidos no csproj da aplicação");
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(symetricSecurityKey));
 
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

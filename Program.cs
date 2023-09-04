@@ -11,7 +11,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 #region Banco de dados
-var connectionString = builder.Configuration.GetConnectionString("SENORBARBERO");
+var connectionString = builder.Configuration["ConnectionStrings:SENORBARBERO"];
 
 builder.Services.AddDbContext<SenorBarberoDbContext>(opts =>
 {
@@ -25,6 +25,10 @@ builder.Services
 #endregion
 
 #region Autenticação
+var symetricSecurityKey = builder.Configuration["SymmetricSecurityKey"];
+if (symetricSecurityKey == null)
+    throw new ApplicationException("symetricSecurityKey não informado nos secrets contidos no csproj da aplicação");
+
 builder.Services.AddAuthentication(opts =>
 {
     opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -33,7 +37,7 @@ builder.Services.AddAuthentication(opts =>
     opts.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("9ADFASFDAFDSAFASFDAFADSFASFADFA4343243")),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(symetricSecurityKey)),
         ValidateAudience = false,
         ValidateIssuer = false,
         ClockSkew = TimeSpan.Zero
