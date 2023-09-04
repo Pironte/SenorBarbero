@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static SenorBarbero.Enums.GlobalEnums;
 
 namespace SenorBarbero.Model
 {

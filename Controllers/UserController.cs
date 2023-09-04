@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SenorBarbero.Data.Dtos;
-using SenorBarbero.Services;
+using SenorBarbero.IServices;
 
 namespace SenorBarbero.Controllers
 {
@@ -8,9 +8,9 @@ namespace SenorBarbero.Controllers
     [Route("[Controller]")]
     public class UserController : ControllerBase
     {
-        public UserService _userService { get; set; }
+        public IUserService _userService { get; set; }
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -25,8 +25,8 @@ namespace SenorBarbero.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginUserDto loginUserDto)
         {
-            await _userService.Login(loginUserDto);
-            return Ok("Usuário logado");
+            var token = await _userService.Login(loginUserDto);
+            return Ok(token);
         }
     }
 }

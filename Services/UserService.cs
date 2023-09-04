@@ -1,21 +1,24 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using SenorBarbero.Data.Dtos;
+using SenorBarbero.IServices;
 using SenorBarbero.Model;
 
 namespace SenorBarbero.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private IMapper _mapper;
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
+        private ITokenService _tokenService;
 
-        public UserService(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserService(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ITokenService tokenService)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
         public async Task Register(CreateUserDto createUserDto)
@@ -35,7 +38,7 @@ namespace SenorBarbero.Services
             }
         }
 
-        public async Task Login(LoginUserDto loginUserDto)
+        public async Task<string> Login(LoginUserDto loginUserDto)
         {
             if (string.IsNullOrWhiteSpace(loginUserDto.UserName) || string.IsNullOrWhiteSpace(loginUserDto.Password))
             {
@@ -48,6 +51,17 @@ namespace SenorBarbero.Services
             {
                 throw new ApplicationException("Usuário não autenticado!");
             }
+
+            var user = _signInManager.UserManager.Users.FirstOrDefault(user => user.NormalizedUserName == loginUserDto.UserName.ToUpper());
+
+            if (user == null)
+            {
+                throw new ApplicationException("Usuário não existe");
+            }
+
+            var token = _tokenService.GenerateToken(user);
+
+            return token;
         }
     }
 }
