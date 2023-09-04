@@ -6,5 +6,6 @@ namespace SenorBarbero.IServices
     {
         public Task Register(CreateUserDto createUserDto);
         public Task<string> Login(LoginUserDto loginUserDto);
+        public void LogOut();
     }
 }

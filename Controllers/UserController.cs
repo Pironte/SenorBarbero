@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SenorBarbero.Data.Dtos;
 using SenorBarbero.IServices;
 
@@ -27,6 +28,14 @@ namespace SenorBarbero.Controllers
         {
             var token = await _userService.Login(loginUserDto);
             return Ok(token);
+        }
+
+        [HttpPost("LogOut")]
+        [Authorize]
+        public IActionResult LogOut()
+        {
+            _userService.LogOut();
+            return Ok();
         }
     }
 }

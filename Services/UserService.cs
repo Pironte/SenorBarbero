@@ -63,5 +63,10 @@ namespace SenorBarbero.Services
 
             return token;
         }
+
+        public async void LogOut()
+        {
+            await _signInManager.SignOutAsync();
+        }
     }
 }
