@@ -9,6 +9,7 @@ namespace SenorBarbero.UserProfile
         public ApplicationProfile()
         {
             CreateMap<CreateUserDto, User>().ReverseMap();
+            CreateMap<BarberShopDto, BarberShop>().ReverseMap();
         }
     }
 }
