@@ -3,19 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SenorBarbero.Model
 {
-    public class Schedules
+    [Table("Horarios")]
+    public class ScheduleSlot
     {
         [Key]
         [Required]
         public int Id { get; set; }
 
         [Required]
+        [Column("Horario")]
         public TimeSpan Schedule { get; set; }
-
-        [ForeignKey("BarberShop")]
-        [Column("Barbearia_Id")]
-        public int BarberShopId { get; set; }
-
-        public virtual BarberShop? BarberShop { get; set; }
     }
 }

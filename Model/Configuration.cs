@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SenorBarbero.Model
 {
-    [Table("Configuracoes")]
-    public class Configurations
+    [Table("Configuracao")]
+    public class Configuration
     {
         [Key]
         public int Id { get; set; }

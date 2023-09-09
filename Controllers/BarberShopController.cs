@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using SenorBarbero.Data.Dtos;
 using SenorBarbero.Model;
@@ -8,6 +9,7 @@ namespace SenorBarbero.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
+    [Authorize]
     public class BarberShopController : ControllerBase
     {
         public BarberShopService _barberShopService;

@@ -2,7 +2,7 @@
 using SenorBarbero.Data.Dtos;
 using SenorBarbero.Model;
 
-namespace SenorBarbero.UserProfile
+namespace SenorBarbero.Profiles
 {
     public class ApplicationProfile : Profile
     {
@@ -10,6 +10,9 @@ namespace SenorBarbero.UserProfile
         {
             CreateMap<CreateUserDto, User>().ReverseMap();
             CreateMap<BarberShopDto, BarberShop>().ReverseMap();
+            CreateMap<ServiceDto, Service>().ReverseMap();
+            CreateMap<ScheduleDto, Schedule>().ReverseMap();
+            CreateMap<ScheduleSlotDto, ScheduleSlot>().ReverseMap();
         }
     }
 }

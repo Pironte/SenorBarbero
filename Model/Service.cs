@@ -1,18 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static SenorBarbero.Enums.GlobalEnums;
 
 namespace SenorBarbero.Model
 {
-    [Table("RedeSocial")]
-    public class SocialMedia
+    [Table("Servico")]
+    public class Service
     {
         [Key]
         [Required]
         public int Id { get; set; }
 
         [Required]
-        [Column("Rede")]
-        public SocialNetwork SocialNetwork { get; set; }
+        [Column("Descricao")]
+        public string? Description { get; set; }
+
+        [Required]
+        [Column("Preco")]
+        public decimal Price { get; set; }
     }
 }

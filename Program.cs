@@ -55,6 +55,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<BarberShopService>();
+builder.Services.AddScoped<ServiceService>();
+builder.Services.AddScoped<ScheduleService>();
+builder.Services.AddScoped<ScheduleSlotService>();
 
 var app = builder.Build();
 

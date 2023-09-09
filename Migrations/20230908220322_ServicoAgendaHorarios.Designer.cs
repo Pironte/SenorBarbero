@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SenorBarbero.Data;
 
@@ -10,9 +11,11 @@ using SenorBarbero.Data;
 namespace SenorBarbero.Migrations
 {
     [DbContext(typeof(SenorBarberoDbContext))]
-    partial class SenorBarberoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230908220322_ServicoAgendaHorarios")]
+    partial class ServicoAgendaHorarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,26 +211,6 @@ namespace SenorBarbero.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Endereco");
-                });
-
-            modelBuilder.Entity("SenorBarbero.Model.BarberShop", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext")
-                        .HasColumnName("Descricao");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("Nome");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Barbearia");
                 });
 
             modelBuilder.Entity("SenorBarbero.Model.Configuration", b =>

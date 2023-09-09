@@ -8,6 +8,6 @@ namespace SenorBarbero.Model
         [ForeignKey("Configuration")]
         [Column("Configuracao_Id")]
         public int? ConfigurationId { get; set; }
-        public virtual Configurations? Configuration { get; set; }
+        public virtual Configuration? Configuration { get; set; }
     }
 }
